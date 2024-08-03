@@ -1,5 +1,8 @@
 {
     "nunitTestRunner.projectsPatterns": [
         "**/tests/**/*.Tests.dll"
-    ]
+    ],
+    "css.validate": false,
+    "scss.validate": false,
+    "less.validate": false
 }
