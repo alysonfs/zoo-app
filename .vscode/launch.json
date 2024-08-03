@@ -1,0 +1,38 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (ZooApp.WebAPI)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/ZooApp.WebAPI/bin/Debug/net8.0/ZooApp.WebAPI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/ZooApp.WebAPI",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/src/ZooApp.WebAPI/Views"
+            },
+            "justMyCode": true
+        },
+        {
+            "name": "Angular Launch",
+            "type": "pwa-chrome",
+            "request": "launch",
+            "preLaunchTask": "npm: start",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/src/ZooApp.Angular",
+            "sourceMaps": true,
+            "trace": true,
+            "sourceMapPathOverrides": {
+                "webpack:///./*": "${webRoot}/*"
+            }
+        }
+    ]
+}

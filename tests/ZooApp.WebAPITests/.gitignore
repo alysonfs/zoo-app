@@ -1,0 +1,28 @@
+## .NET Core
+bin/
+obj/
+out/
+*.nupkg
+*.snupkg
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.dll.config
+*.exe.config
+*.runtimeconfig.json
+appsettings.json
+appsettings.Development.json
+*.csproj.user
+*.launchSettings.json
+
+## VS Code
+.vscode/
+*.code-workspace
+
+## Rider
+.idea/
+
+## Visual Studio
+.vs/
+*.csproj.DotSettings.user
