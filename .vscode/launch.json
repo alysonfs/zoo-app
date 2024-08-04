@@ -22,14 +22,17 @@
             "justMyCode": true
         },
         {
-            "name": "Angular Launch",
-            "type": "pwa-chrome",
+            "name": "Angular serve",
+            "type": "chrome",
             "request": "launch",
             "preLaunchTask": "npm: start",
-            "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}/src/ZooApp.Angular",
+            "url": "http://localhost:4200/",
+            "webRoot": "${workspaceFolder}/src/ZooApp.WebApp",
             "sourceMaps": true,
             "trace": true,
+            "runtimeArgs": [
+                "--disable-gpu"
+            ],
             "sourceMapPathOverrides": {
                 "webpack:///./*": "${webRoot}/*"
             }

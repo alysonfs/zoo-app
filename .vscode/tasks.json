@@ -1,31 +1,28 @@
 {
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/ZooApp.WebAPI/ZooApp.WebAPI.csproj"
-            ],
-            "problemMatcher": "$msCompile",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "Tarefa gerada pelo depurador."
+      {
+        "label": "build",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/src/ZooApp.WebAPI/ZooApp.WebAPI.csproj"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": {
+          "kind": "build",
+          "isDefault": true
         },
-        {
-            "label": "npm: start",
-            "type": "npm",
-            "script": "start",
-            "group": "build",
-            "isBackground": true,
-            "problemMatcher": [
-                "$tsc"
-            ],
-            "detail": "Inicia o servidor de desenvolvimento Angular"
-        }
+        "detail": "Tarefa gerada pelo depurador."
+      },
+      {
+        "label": "npm: start",
+        "type": "npm",
+        "script": "start",
+        "path": "src/ZooApp.WebApp",
+        "problemMatcher": [],
+        "detail": "npm: start - src/ZooApp.WebApp"
+      }
     ]
 }

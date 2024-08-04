@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "forms.nunit-test-runner"
+        "forms.nunit-test-runner",
+        "angular.ng-template"
     ]
 }
