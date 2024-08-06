@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ZooApp.WebAPI.Controller.DTO
 {
-    public class AddAnimalInput()
+    public class AddAnimalPayload()
     {
         [Required(ErrorMessage = "O nome do animal é obrigatório")]
         public required string Name { get; set; }

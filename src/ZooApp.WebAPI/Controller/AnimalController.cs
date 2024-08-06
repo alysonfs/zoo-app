@@ -9,13 +9,11 @@ namespace ZooApp.WebAPI.Controller
     [Route("[controller]")]
     public class AnimalController : ControllerBase
     {
-        private readonly ILogger<AnimalController> _logger;
         private readonly IAnimalFileRepository _animalFileRepository;
         private readonly IAnimalRepository _animalRepository;
 
-        public AnimalController( ILogger<AnimalController> logger, IAnimalFileRepository animalFileRepository, IAnimalRepository animalRepository)
+        public AnimalController( IAnimalFileRepository animalFileRepository, IAnimalRepository animalRepository)
         {
-            _logger = logger;
             _animalFileRepository = animalFileRepository;
             _animalRepository = animalRepository;
         }
@@ -35,7 +33,7 @@ namespace ZooApp.WebAPI.Controller
         }
 
         [HttpPost("Add")]
-        public async Task<Animal> AddAnimal(AddAnimalInput payload)
+        public async Task<Animal> AddAnimal(AddAnimalPayload payload)
         {
             var animalAdded = await _animalRepository.AddAnimal(new Animal() {
                 Name = payload.Name,

@@ -3,22 +3,14 @@ using ZooApp.WebAPI.Controller.Contract;
 using ZooApp.WebAPI.Data;
 using ZooApp.WebAPI.Data.Contract;
 using ZooApp.WebAPI.Data.Model;
+using ZooApp.WebAPI.Data.Repository;
 using ZooApp.WebAPI.Domain;
 
 namespace ZooApp.WebAPI.Repository
 {
-    public class AnimalRepository : IAnimalRepository
+    public class AnimalRepository : RepositoryBase , IAnimalRepository
     {
-        private readonly ILogger<AnimalRepository> _logger;
-        private readonly ZooContext _context;
-        private readonly IUUIDGererator _uuidGenerator;
-
-        public AnimalRepository(ILogger<AnimalRepository> logger, ZooContext context, IUUIDGererator uuidGenerator)
-        {
-            _logger = logger;
-            _context = context;
-            _uuidGenerator = uuidGenerator;
-        }
+        public AnimalRepository(ZooContext context, IUUIDGererator uuidGenerator): base(context, uuidGenerator) { }
 
         public async Task<IEnumerable<Animal>> GetAnimals()
         {
