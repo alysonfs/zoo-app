@@ -48,7 +48,15 @@ namespace ZooApp.WebAPI.Migrations
                     b.Property<string>("UUID")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ZooModelID")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("UUID")
+                        .IsUnique();
+
+                    b.HasIndex("ZooModelID");
 
                     b.ToTable("Animals", (string)null);
                 });
@@ -62,6 +70,42 @@ namespace ZooApp.WebAPI.Migrations
                     b.Property<int?>("Age")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UUID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ZooModelID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UUID")
+                        .IsUnique();
+
+                    b.HasIndex("ZooModelID");
+
+                    b.ToTable("Guests", (string)null);
+                });
+
+            modelBuilder.Entity("ZooApp.WebAPI.Data.Model.ZooModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -71,7 +115,31 @@ namespace ZooApp.WebAPI.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Guests", (string)null);
+                    b.HasIndex("UUID")
+                        .IsUnique();
+
+                    b.ToTable("Zoos", (string)null);
+                });
+
+            modelBuilder.Entity("ZooApp.WebAPI.Data.Model.AnimalModel", b =>
+                {
+                    b.HasOne("ZooApp.WebAPI.Data.Model.ZooModel", null)
+                        .WithMany("Animals")
+                        .HasForeignKey("ZooModelID");
+                });
+
+            modelBuilder.Entity("ZooApp.WebAPI.Data.Model.GuestModel", b =>
+                {
+                    b.HasOne("ZooApp.WebAPI.Data.Model.ZooModel", null)
+                        .WithMany("Guests")
+                        .HasForeignKey("ZooModelID");
+                });
+
+            modelBuilder.Entity("ZooApp.WebAPI.Data.Model.ZooModel", b =>
+                {
+                    b.Navigation("Animals");
+
+                    b.Navigation("Guests");
                 });
 #pragma warning restore 612, 618
         }

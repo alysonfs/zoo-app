@@ -27,6 +27,7 @@ builder.Services.AddScoped<IUUIDGererator, UUIDGenerator>();
 builder.Services.AddScoped<IAnimalFileRepository, AnimalFileRepository>();
 builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
 builder.Services.AddScoped<IGuestRepository, GuestRepository>();
+builder.Services.AddScoped<IZooRepository, ZooRepository>();
 
 builder.Services.AddControllers(options => {
     options.Filters.Add<HttpResponseExceptionFilter>();

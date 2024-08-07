@@ -21,9 +21,4 @@ public class Animal
     {
         this.DateOfBirth = DateTime.Now;
     }
-
-    public virtual string MakeSound()
-    {
-        return $"The {this.TypeSound} makes a sound";
-    }
 }

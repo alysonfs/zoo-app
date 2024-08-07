@@ -9,6 +9,7 @@ namespace ZooApp.WebAPI.Data
 
         public DbSet<AnimalModel> Animals { get; set; }
         public DbSet<GuestModel> Guests { get; set; }
+        public DbSet<ZooModel> Zoos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -17,12 +18,22 @@ namespace ZooApp.WebAPI.Data
                 entity.ToTable("Animals");
                 entity.HasKey(e => e.ID);
                 entity.Property(e => e.ID).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.UUID).IsUnique();
             });
 
             modelBuilder.Entity<GuestModel>(entity => {
                 entity.ToTable("Guests");
                 entity.HasKey(e => e.ID);
                 entity.Property(e => e.ID).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.UUID).IsUnique();
+                entity.HasIndex(e => e.Email).IsUnique();
+            });
+
+            modelBuilder.Entity<ZooModel>(entity => {
+                entity.ToTable("Zoos");
+                entity.HasKey(e => e.ID);
+                entity.Property(e => e.ID).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.UUID).IsUnique();
             });
         }
     }

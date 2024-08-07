@@ -16,7 +16,8 @@ namespace ZooApp.WebAPI.Data.Repository
             {
                 UUID = _uuidGenerator.Generate(),
                 Name = guest.Name,
-                Age = guest.Age
+                Age = guest.Age,
+                Email = guest.Email
             };
 
             await _context.Guests.AddAsync(newGuest);

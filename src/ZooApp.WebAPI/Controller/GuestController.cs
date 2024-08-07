@@ -21,7 +21,8 @@ namespace ZooApp.WebAPI.Controller
         {
             var guestAdded = await _guestRepository.AddGuest(new Guest() {
                 Name = payload.Name,
-                Age = payload.Age
+                Age = payload.Age,
+                Email = payload.Email
             });
 
             return guestAdded;

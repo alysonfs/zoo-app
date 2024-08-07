@@ -8,5 +8,7 @@ namespace ZooApp.WebAPI.Controller.DTO
         public required string Name { get; set; }
         [Required(ErrorMessage = "A idade do visitante é obrigatória")]
         public required int Age { get; set; }
+        [Required(ErrorMessage = "O email do visitante é obrigatório")]
+        public required string Email { get; set; }
     }
 }
