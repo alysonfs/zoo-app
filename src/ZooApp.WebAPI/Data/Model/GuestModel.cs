@@ -3,7 +3,7 @@ using ZooApp.WebAPI.Domain;
 
 namespace ZooApp.WebAPI.Data.Model
 {
-    public class AnimalModel : Animal
+    public class GuestModel : Guest 
     {
         [Key]
         public new int ID { get; set; }

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using ZooApp.WebAPI.Data.Model;
-using ZooApp.WebAPI.Domain;
 
 namespace ZooApp.WebAPI.Data
 {
@@ -9,6 +8,7 @@ namespace ZooApp.WebAPI.Data
         public ZooContext(DbContextOptions<ZooContext> options): base(options) { }
 
         public DbSet<AnimalModel> Animals { get; set; }
+        public DbSet<GuestModel> Guests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,8 +19,10 @@ namespace ZooApp.WebAPI.Data
                 entity.Property(e => e.ID).ValueGeneratedOnAdd();
             });
 
-            modelBuilder.Entity<Image>(entity => {
-                entity.HasNoKey();
+            modelBuilder.Entity<GuestModel>(entity => {
+                entity.ToTable("Guests");
+                entity.HasKey(e => e.ID);
+                entity.Property(e => e.ID).ValueGeneratedOnAdd();
             });
         }
     }

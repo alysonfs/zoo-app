@@ -23,11 +23,10 @@ namespace ZooApp.WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -35,28 +34,44 @@ namespace ZooApp.WebAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SoundFileName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SoundUrl")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Species")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("TypeSound")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("UUID")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Animals");
+                    b.ToTable("Animals", (string)null);
+                });
+
+            modelBuilder.Entity("ZooApp.WebAPI.Data.Model.GuestModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Age")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UUID")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Guests", (string)null);
                 });
 #pragma warning restore 612, 618
         }

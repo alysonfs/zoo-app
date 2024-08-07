@@ -41,3 +41,8 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+
+# Data sqlite
+*.dat
+*.dat-shm
+*.dat-wal

@@ -45,7 +45,7 @@ namespace ZooApp.WebAPI.Controller
             return animalAdded;
         }
 
-        [HttpGet("Get/{uuid}")]
+        [HttpGet("{uuid}")]
         public async Task<ActionResult<Animal?>> GetAnimal(string uuid)
         {
             var animal = await _animalRepository.GetAnimalByUUID(uuid);

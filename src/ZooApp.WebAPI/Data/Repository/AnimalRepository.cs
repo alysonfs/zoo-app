@@ -15,63 +15,19 @@ namespace ZooApp.WebAPI.Repository
         public async Task<IEnumerable<Animal>> GetAnimals()
         {
             var databaseAnimals = await _context.Animals.ToListAsync();
-            List<Animal> animals = [];
-            databaseAnimals.ForEach(a =>
-            {
-                var animal = (Animal) a;
-                animal.Image = new Image() { 
-                    Url = a.ImageUrl ?? string.Empty
-                };
-
-                animal.Sound = new Sound() { 
-                    Url = a.SoundUrl ?? string.Empty, 
-                    FileName = a.SoundFileName ?? string.Empty
-                };
-
-                animals.Add(animal);
-            });
-            
-            return animals;
+            return databaseAnimals;
         }
 
         public async Task<Animal?> GetAnimalByID(int id)
         {
             var databaseAnimal = await _context.Animals.FirstOrDefaultAsync(a => a.ID == id);
-            if (databaseAnimal != null)
-            {
-                var animalResult = (Animal) databaseAnimal;
-                animalResult.Image = new Image() { 
-                    Url = databaseAnimal.ImageUrl ?? string.Empty
-                };
-
-                animalResult.Sound = new Sound() { 
-                    Url = databaseAnimal.SoundUrl ?? string.Empty, 
-                    FileName = databaseAnimal.SoundFileName ?? string.Empty
-                };
-                return animalResult;
-            }
-
-            return null;
+            return databaseAnimal;
         }
 
         public async Task<Animal?> GetAnimalByUUID(string uuid)
         {
             var databaseAnimal = await _context.Animals.FirstOrDefaultAsync(a => a.UUID == uuid);
-            if (databaseAnimal != null)
-            {
-                var animalResult = (Animal) databaseAnimal;
-                animalResult.Image = new Image() { 
-                    Url = databaseAnimal.ImageUrl ?? string.Empty
-                };
-
-                animalResult.Sound = new Sound() { 
-                    Url = databaseAnimal.SoundUrl ?? string.Empty, 
-                    FileName = databaseAnimal.SoundFileName ?? string.Empty
-                };
-                return animalResult;
-            }
-
-            return null;
+            return databaseAnimal;
         }
 
         public async Task<Animal> AddAnimal(Animal animal)
@@ -84,9 +40,9 @@ namespace ZooApp.WebAPI.Repository
                 Species = animal.Species,
                 DateOfBirth = animal.DateOfBirth,
                 TypeSound = animal.TypeSound,
-                ImageUrl = animal.Image?.Url ?? string.Empty,
-                SoundUrl = animal.Sound?.Url ?? string.Empty,
-                SoundFileName = animal.Sound?.FileName ?? string.Empty
+                ImageUrl = animal.ImageUrl,
+                SoundUrl = animal.SoundUrl,
+                SoundFileName = animal.SoundFileName
             };
 
             await _context.Animals.AddAsync(newAnimal);

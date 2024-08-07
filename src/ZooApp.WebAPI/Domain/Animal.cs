@@ -13,8 +13,9 @@ public class Animal
     public string? Species { get; set; }
     public DateTime? DateOfBirth { get; set; }
     public string? TypeSound { get; set; }
-    public Image? Image { get; set; }
-    public Sound? Sound { get; set; }
+    public string? ImageUrl { get; set; }
+    public string? SoundUrl { get; set; }
+    public string? SoundFileName { get; set; }
 
     public Animal()
     {

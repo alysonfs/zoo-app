@@ -5,6 +5,7 @@ using ZooApp.WebAPI.Data;
 using ZooApp.WebAPI.Data.Contract;
 using ZooApp.WebAPI.Infra.UUID;
 using ZooApp.WebAPI.Http;
+using ZooApp.WebAPI.Data.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddDbContext<ZooContext>(options => {
 builder.Services.AddScoped<IUUIDGererator, UUIDGenerator>();
 builder.Services.AddScoped<IAnimalFileRepository, AnimalFileRepository>();
 builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
+builder.Services.AddScoped<IGuestRepository, GuestRepository>();
 
 builder.Services.AddControllers(options => {
     options.Filters.Add<HttpResponseExceptionFilter>();

@@ -39,15 +39,14 @@ public class AnimalFileRepository: IAnimalFileRepository
                 int count = 0;
                 animalsFromJson.ForEach(animalJson =>
                 {
-                    Image image = new () { Url = animalJson.imageUrl };
-                    Sound sound = new() { Url = animalJson.urlSound, FileName = animalJson.fileNameSound };
                     Animal animal = new()
                     {
                         Name = animalJson.name,
                         UUID = animalJson.id,
                         ID = count,
-                        Image = image,
-                        Sound = sound
+                        SoundFileName = animalJson.fileNameSound,
+                        SoundUrl = animalJson.urlSound,
+                        ImageUrl = animalJson.imageUrl
                     };
                     animals.Add(animal);
                     count++;
