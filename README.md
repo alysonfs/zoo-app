@@ -1,3 +1,46 @@
+# Sistema de Gestão de Zoológico
+
+## Instruções
+
+Implemente um sistema que gerencie animais e visitantes no zoológico. Cada animal e visitante deve ter características específicas, e o sistema deve permitir interações entre eles.
+
+## Requisitos
+
+### 1. Classes de Animais:
+
+- Crie uma classe base `Animal` com propriedades comuns como ID (int), Nome (string), Espécie (string), DataDeNascimento (DateTime) e métodos como `EmitirSom()`.
+- Implemente subclasses para tipos específicos de animais (por exemplo, `Leao`, `Elefante`, `Macaco`), cada uma com um som específico (`EmitirSom`).
+
+### 2. Classes de Visitantes:
+
+- Crie uma classe `Visitante` com propriedades como ID (int), Nome (string), Idade (int) e métodos como `InteragirComAnimal(Animal animal)`.
+
+### 3. Interações:
+
+- O método `InteragirComAnimal` deve simular uma interação entre o visitante e o animal, podendo incluir a emissão do som do animal e uma mensagem de resposta do visitante.
+- Exemplo: Se o visitante interagir com um leão, o leão deve rugir e o visitante pode responder com uma mensagem como “Uau, que rugido incrível!”.
+
+### 4. Gestão de Zoológico:
+
+- Crie uma classe `Zoologico` que gerencie a lista de animais e visitantes.
+- O sistema deve permitir adicionar novos animais e visitantes ao zoológico.
+- O sistema deve permitir listar todos os animais e visitantes presentes no zoológico.
+- O sistema deve permitir que um visitante interaja com um animal específico.
+
+## Regras e Considerações
+
+- Utilize boas práticas de programação orientada a objetos.
+- Implemente testes unitários para garantir o funcionamento correto do sistema.
+- Documente o código e adicione comentários explicativos onde achar necessário.
+
+## Exemplos de Uso
+
+- Adicionar um novo leão ao zoológico com o nome “Simba” e a data de nascimento “01/01/2015”.
+- Adicionar um novo visitante com o nome “Alice” e a idade 10 anos.
+- Listar todos os animais e visitantes no zoológico.
+- Fazer com que “Alice” interaja com “Simba” e exibir o resultado da interação.
+
+
 # Zoo App Monorepo
 ## Estrutura do Projeto
 
