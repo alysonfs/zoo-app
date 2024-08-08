@@ -6,8 +6,7 @@ import { LayoutComponent } from './layout/layout.component';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, LayoutComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'ZooApp.WebApp';
