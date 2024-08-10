@@ -9,5 +9,5 @@ import { LayoutComponent } from './layout/layout.component';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'ZooApp.WebApp';
+  title = 'Zoo App';
 }

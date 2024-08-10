@@ -1,4 +1,10 @@
 <div class="flex h-screen flex-col">
     <app-aside-nav></app-aside-nav>
     <app-header></app-header>
+    <div class="absolute mt-20 left-60 ml-4 flex-1 overflow-y-auto">
+        <div class="relative p-5">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    
 </div>
