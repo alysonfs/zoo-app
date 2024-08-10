@@ -22,6 +22,15 @@ builder.Services.AddDbContext<ZooContext>(options => {
     options.UseSqlite(connectionString);
 });
 
+// Adicionar serviço CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:4200")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
+
 // Serviços de escopo
 builder.Services.AddScoped<IUUIDGererator, UUIDGenerator>();
 builder.Services.AddScoped<IAnimalFileRepository, AnimalFileRepository>();
@@ -43,6 +52,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowSpecificOrigin");
 
 app.UseHttpsRedirection();
 

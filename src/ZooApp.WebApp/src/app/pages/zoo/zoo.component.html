@@ -1,20 +1,28 @@
-<div class="d-flex flex-col h-fill w-fill">
+<div class="container mx-auto h-full w-full">
     <div id="">
-        <span class="text-2xl font-semibold text-red-500">Zoos</span>
+        <span class="text-2xl font-semibold text-red-500">Gerenciar Zoos</span>
     </div>
-    <div id="list-zoos">
-        <table id="pagination-table" class="table-auto w-full">
-            <thead>
+    <div class="d-flex flex-row">
+        <button class="btn btn-primary">Adicionar</button>
+    </div>
+    <table id="pagination-table" class="table-auto w-full">
+        <thead>
+            <tr>
+                <th class="border text-center px-4">Nome</th>
+                <th class="border text-center px-4">Endereço</th>
+                <th class="border text-center px-4">Animais</th>
+                <th class="border text-center px-4">Visitantes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (zoo of zooList; track zoo.uuid) {
                 <tr>
-                    <th class="px-4 py-2">Nome</th>
-                    <th class="px-4 py-2">Endereço</th>
-                    <th class="px-4 py-2">Animais</th>
-                    <th class="px-4 py-2">Visitantes</th>
+                    <td class="border px-4">{{ zoo.name }}</td>
+                    <td class="border px-4">{{ zoo.address }}</td>
+                    <td class="border text-center px-4">{{ zoo.guestCount }}</td>
+                    <td class="border text-center px-4">{{ zoo.animalCount }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                <!-- Conteúdo da tabela -->
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
 </div>
