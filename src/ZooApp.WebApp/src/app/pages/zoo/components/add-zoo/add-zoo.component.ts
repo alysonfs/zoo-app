@@ -1,21 +1,36 @@
-import { Component } from "@angular/core";
-import { ZooService } from "../../../../service/zoo.service";
+import { Component, Input, OnInit } from "@angular/core";
+import {FormGroup, FormControl, ReactiveFormsModule} from '@angular/forms';
+import { ZooService } from "../../../../service/zoo";
 import { ZooModel } from "../../../../model/zoo.model";
+import { ZooComponent } from "../../zoo.component";
 
 @Component({
-    selector: 'add-zoo',
-    templateUrl: './add-zoo.component.html'
+  selector: 'add-zoo',
+  standalone: true,
+  templateUrl: './add-zoo.component.html',
+  imports: [ZooComponent, ReactiveFormsModule] 
 })
-export class AddZooComponent {
-    name: string = '';
-    address: string = '';
+export class AddZooComponent implements OnInit {
+  @Input() zooList: ZooModel[] = [];
 
-    constructor(private zooService: ZooService) {}
+  newZooForm = new FormGroup({
+    name: new FormControl(''),
+    address: new FormControl(''),
+  });
+  
+  constructor(private zooService: ZooService) {}
 
-    addZoo() {
-        const newZoo = new ZooModel(this.name, this.address);
-        this.zooService.addZoo(newZoo);
-        this.name = '';
-        this.address = '';
-    }
+  ngOnInit(): void {}
+  
+  addZoo(): void {
+    const { name, address } = this.newZooForm.value;
+    if(name && address) {
+      this.zooService.addZoo({ name, address })
+        .then(zoo => {
+          if (zoo) {
+            this.zooList.push(new ZooModel(zoo.name, zoo.address));
+          }
+        });
+    }  
+  }
 }

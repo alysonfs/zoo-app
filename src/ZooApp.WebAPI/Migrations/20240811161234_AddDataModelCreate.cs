@@ -15,25 +15,23 @@ namespace ZooApp.WebAPI.Migrations
                 name: "Zoos",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UUID = table.Column<string>(type: "TEXT", nullable: true),
+                    UUID = table.Column<string>(type: "TEXT", nullable: false),
+                    ID = table.Column<int>(type: "INTEGER", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Zoos", x => x.ID);
+                    table.PrimaryKey("PK_Zoos", x => x.UUID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Animals",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ZooModelID = table.Column<int>(type: "INTEGER", nullable: true),
-                    UUID = table.Column<string>(type: "TEXT", nullable: true),
+                    UUID = table.Column<string>(type: "TEXT", nullable: false),
+                    ZooUUID = table.Column<string>(type: "TEXT", nullable: false),
+                    ID = table.Column<int>(type: "INTEGER", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Species = table.Column<string>(type: "TEXT", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -44,46 +42,41 @@ namespace ZooApp.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Animals", x => x.ID);
+                    table.PrimaryKey("PK_Animals", x => x.UUID);
                     table.ForeignKey(
-                        name: "FK_Animals_Zoos_ZooModelID",
-                        column: x => x.ZooModelID,
+                        name: "FK_Animals_Zoos_ZooUUID",
+                        column: x => x.ZooUUID,
                         principalTable: "Zoos",
-                        principalColumn: "ID");
+                        principalColumn: "UUID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Guests",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ZooModelID = table.Column<int>(type: "INTEGER", nullable: true),
-                    UUID = table.Column<string>(type: "TEXT", nullable: true),
+                    UUID = table.Column<string>(type: "TEXT", nullable: false),
+                    ZooUUID = table.Column<string>(type: "TEXT", nullable: false),
+                    ID = table.Column<int>(type: "INTEGER", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Age = table.Column<int>(type: "INTEGER", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Guests", x => x.ID);
+                    table.PrimaryKey("PK_Guests", x => x.UUID);
                     table.ForeignKey(
-                        name: "FK_Guests_Zoos_ZooModelID",
-                        column: x => x.ZooModelID,
+                        name: "FK_Guests_Zoos_ZooUUID",
+                        column: x => x.ZooUUID,
                         principalTable: "Zoos",
-                        principalColumn: "ID");
+                        principalColumn: "UUID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Animals_UUID",
+                name: "IX_Animals_ZooUUID",
                 table: "Animals",
-                column: "UUID",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Animals_ZooModelID",
-                table: "Animals",
-                column: "ZooModelID");
+                column: "ZooUUID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Guests_Email",
@@ -92,21 +85,9 @@ namespace ZooApp.WebAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Guests_UUID",
+                name: "IX_Guests_ZooUUID",
                 table: "Guests",
-                column: "UUID",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Guests_ZooModelID",
-                table: "Guests",
-                column: "ZooModelID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Zoos_UUID",
-                table: "Zoos",
-                column: "UUID",
-                unique: true);
+                column: "ZooUUID");
         }
 
         /// <inheritdoc />

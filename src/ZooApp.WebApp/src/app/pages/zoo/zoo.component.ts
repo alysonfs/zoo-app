@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ZooService } from '../../service/zoo';
 import { ZooModel } from '../../model/zoo.model';
+import { AddZooComponent } from './components/add-zoo/add-zoo.component';
 
 @Component({
   selector: 'app-zoo',
   standalone: true,
-  imports: [],
+  imports: [AddZooComponent],
   templateUrl: './zoo.component.html',
   styleUrl: './zoo.component.css'
 })
@@ -14,17 +15,14 @@ export class ZooComponent {
 
   public zooList: ZooModel[] = [];
 
-  addZoo(name: string, address: string): void {
-    this.zooService.addZoo({ name, address })
-      .then(zoo => {
-        if (zoo) {
-          this.zooList.push(new ZooModel(zoo.name, zoo.address));
-        }
-      });
-  }
-
   ngOnInit(): void {
     this.zooService.getZooList()
-      .then(data => this.zooList = data.map(zoo => new ZooModel(zoo.name, zoo.address)));
+      .then(data => this.zooList = data.map(zoo => {
+        const zooData = new ZooModel(zoo.name, zoo.address);
+        zooData.uuid = zoo.uuid;
+        zooData.animalCount = zoo.animalCount;
+        zooData.guestCount = zoo.guestCount;
+        return zooData;
+      }));
   }
 }

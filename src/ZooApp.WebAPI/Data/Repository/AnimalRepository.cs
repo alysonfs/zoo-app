@@ -18,6 +18,22 @@ namespace ZooApp.WebAPI.Repository
             return databaseAnimals;
         }
 
+         public async Task<IEnumerable<Animal>> GetAnimalsByZooUUID(string zooUUID)
+        {
+            if(string.IsNullOrEmpty(zooUUID))
+            {
+                throw new ArgumentNullException(nameof(zooUUID));
+            }
+
+            var query = from animal in _context.Animals
+                        join zoo in _context.Zoos on animal.ZooUUID equals zoo.UUID
+                        where zoo.UUID == zooUUID
+                        select animal;
+
+            var databaseAnimals = await query.ToListAsync();
+            return databaseAnimals;
+        }
+
         public async Task<Animal?> GetAnimalByID(int id)
         {
             var databaseAnimal = await _context.Animals.FirstOrDefaultAsync(a => a.ID == id);
@@ -30,7 +46,7 @@ namespace ZooApp.WebAPI.Repository
             return databaseAnimal;
         }
 
-        public async Task<Animal> AddAnimal(Animal animal)
+        public async Task<Animal> AddAnimal(string zooUUID, Animal animal)
         {
             var uuidGenerator = _uuidGenerator.Generate();
             var newAnimal = new AnimalModel
@@ -42,7 +58,8 @@ namespace ZooApp.WebAPI.Repository
                 TypeSound = animal.TypeSound,
                 ImageUrl = animal.ImageUrl,
                 SoundUrl = animal.SoundUrl,
-                SoundFileName = animal.SoundFileName
+                SoundFileName = animal.SoundFileName,
+                ZooUUID = zooUUID
             };
 
             await _context.Animals.AddAsync(newAnimal);

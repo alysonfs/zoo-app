@@ -6,6 +6,8 @@ namespace ZooApp.WebAPI.Data.Model
     public class AnimalModel : Animal
     {
         [Key]
-        public new int ID { get; set; }
+        public required new string UUID { get; set; }
+        public required string ZooUUID { get; set; }
+        public  ZooModel? Zoo { get; set; }
     }
 }

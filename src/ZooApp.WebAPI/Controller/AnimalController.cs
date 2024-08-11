@@ -26,16 +26,16 @@ namespace ZooApp.WebAPI.Controller
         }
 
         [HttpGet("List")]
-        public async Task<IEnumerable<Animal>> GetAnimalList()
+        public async Task<IEnumerable<Animal>> GetAnimalListByZooId(string zooUUID)
         {
-            var animals = await _animalRepository.GetAnimals();
+            var animals = await _animalRepository.GetAnimalsByZooUUID(zooUUID);
             return animals;
         }
 
         [HttpPost("Add")]
         public async Task<Animal> AddAnimal(AddAnimalPayload payload)
         {
-            var animalAdded = await _animalRepository.AddAnimal(new Animal() {
+            var animalAdded = await _animalRepository.AddAnimal(payload.ZooUUID, new Animal() {
                 Name = payload.Name,
                 Species = payload.Species,
                 DateOfBirth = payload.DateOfBirth,

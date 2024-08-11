@@ -10,14 +10,20 @@ namespace ZooApp.WebAPI.Data.Repository
     {
         public GuestRepository(ZooContext context, IUUIDGererator uuidGenerator) : base(context, uuidGenerator){ }
         
-        public async Task<Guest> AddGuest(Guest guest)
+        public async Task<Guest> AddGuest(string zooUUID, Guest guest)
         {
+            if(string.IsNullOrEmpty(zooUUID))
+            {
+                throw new ArgumentNullException(nameof(zooUUID));
+            }
+
             var newGuest = new GuestModel()
             {
                 UUID = _uuidGenerator.Generate(),
                 Name = guest.Name,
                 Age = guest.Age,
-                Email = guest.Email
+                Email = guest.Email,
+                ZooUUID = zooUUID
             };
 
             await _context.Guests.AddAsync(newGuest);
@@ -40,6 +46,22 @@ namespace ZooApp.WebAPI.Data.Repository
         public async Task<IEnumerable<Guest>> GetGuests()
         {
             var guests = await _context.Guests.ToListAsync();
+            return guests;
+        }
+
+        public async Task<IEnumerable<Guest>> GetGuestsByZooUUID(string zooUUID)
+        {
+            if(string.IsNullOrEmpty(zooUUID))
+            {
+                throw new ArgumentNullException(nameof(zooUUID));
+            }
+
+            var query = from guest in _context.Guests
+                        join zoo in _context.Zoos on guest.ZooUUID equals zoo.UUID
+                        where zoo.UUID == zooUUID
+                        select guest;
+
+            var guests = await query.ToListAsync();
             return guests;
         }
     }

@@ -19,12 +19,15 @@ namespace ZooApp.WebAPI.Migrations
 
             modelBuilder.Entity("ZooApp.WebAPI.Data.Model.AnimalModel", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("UUID")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("TEXT");
@@ -45,27 +48,21 @@ namespace ZooApp.WebAPI.Migrations
                     b.Property<string>("TypeSound")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UUID")
+                    b.Property<string>("ZooUUID")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ZooModelID")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("UUID");
 
-                    b.HasKey("ID");
-
-                    b.HasIndex("UUID")
-                        .IsUnique();
-
-                    b.HasIndex("ZooModelID");
+                    b.HasIndex("ZooUUID");
 
                     b.ToTable("Animals", (string)null);
                 });
 
             modelBuilder.Entity("ZooApp.WebAPI.Data.Model.GuestModel", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("UUID")
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("Age")
                         .HasColumnType("INTEGER");
@@ -74,65 +71,69 @@ namespace ZooApp.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UUID")
+                    b.Property<string>("ZooUUID")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ZooModelID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ID");
+                    b.HasKey("UUID");
 
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("UUID")
-                        .IsUnique();
-
-                    b.HasIndex("ZooModelID");
+                    b.HasIndex("ZooUUID");
 
                     b.ToTable("Guests", (string)null);
                 });
 
             modelBuilder.Entity("ZooApp.WebAPI.Data.Model.ZooModel", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("UUID")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UUID")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UUID")
-                        .IsUnique();
+                    b.HasKey("UUID");
 
                     b.ToTable("Zoos", (string)null);
                 });
 
             modelBuilder.Entity("ZooApp.WebAPI.Data.Model.AnimalModel", b =>
                 {
-                    b.HasOne("ZooApp.WebAPI.Data.Model.ZooModel", null)
+                    b.HasOne("ZooApp.WebAPI.Data.Model.ZooModel", "Zoo")
                         .WithMany("Animals")
-                        .HasForeignKey("ZooModelID");
+                        .HasForeignKey("ZooUUID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Zoo");
                 });
 
             modelBuilder.Entity("ZooApp.WebAPI.Data.Model.GuestModel", b =>
                 {
-                    b.HasOne("ZooApp.WebAPI.Data.Model.ZooModel", null)
+                    b.HasOne("ZooApp.WebAPI.Data.Model.ZooModel", "Zoo")
                         .WithMany("Guests")
-                        .HasForeignKey("ZooModelID");
+                        .HasForeignKey("ZooUUID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Zoo");
                 });
 
             modelBuilder.Entity("ZooApp.WebAPI.Data.Model.ZooModel", b =>

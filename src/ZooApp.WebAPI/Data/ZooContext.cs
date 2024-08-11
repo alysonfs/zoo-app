@@ -16,24 +16,21 @@ namespace ZooApp.WebAPI.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<AnimalModel>(entity => {
                 entity.ToTable("Animals");
-                entity.HasKey(e => e.ID);
+                entity.HasKey(e => e.UUID);
                 entity.Property(e => e.ID).ValueGeneratedOnAdd();
-                entity.HasIndex(e => e.UUID).IsUnique();
             });
 
             modelBuilder.Entity<GuestModel>(entity => {
                 entity.ToTable("Guests");
-                entity.HasKey(e => e.ID);
+                entity.HasKey(e => e.UUID);
                 entity.Property(e => e.ID).ValueGeneratedOnAdd();
-                entity.HasIndex(e => e.UUID).IsUnique();
                 entity.HasIndex(e => e.Email).IsUnique();
             });
 
             modelBuilder.Entity<ZooModel>(entity => {
                 entity.ToTable("Zoos");
-                entity.HasKey(e => e.ID);
+                entity.HasKey(e => e.UUID);
                 entity.Property(e => e.ID).ValueGeneratedOnAdd();
-                entity.HasIndex(e => e.UUID).IsUnique();
             });
         }
     }

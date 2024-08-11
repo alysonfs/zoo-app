@@ -6,5 +6,7 @@ namespace ZooApp.WebAPI.Domain
         public string? UUID { get; set; }
         public required string Name { get; set; }
         public string? Address { get; set; }
+        public int? AnimalCount { get; set; }
+        public int? GuestCount { get; set; }
     }
 }

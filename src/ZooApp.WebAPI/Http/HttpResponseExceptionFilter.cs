@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore;
 
 namespace ZooApp.WebAPI.Http
 {
@@ -13,7 +12,7 @@ namespace ZooApp.WebAPI.Http
         public void OnActionExecuted(ActionExecutedContext context)
         {
             if (context.Exception is not null)
-            {
+            {                
                 HttpResponseException httpResponseException = new(200, new { 
                     StatusCode = 200,
                     Message = "Nenhum dado encontrado"

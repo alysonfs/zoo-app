@@ -19,7 +19,7 @@ namespace ZooApp.WebAPI.Controller
         [HttpPost("Add")]
         public async Task<Guest> AddGuest(AddGuestPayload payload)
         {
-            var guestAdded = await _guestRepository.AddGuest(new Guest() {
+            var guestAdded = await _guestRepository.AddGuest(payload.ZooUUID, new Guest() {
                 Name = payload.Name,
                 Age = payload.Age,
                 Email = payload.Email
